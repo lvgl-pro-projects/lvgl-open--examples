@@ -54,7 +54,7 @@ lv_obj_t * lv_example_image_recolor_create(void)
     lv_label_set_text(lv_label_0, "Image: recolor");
     
     lv_obj_t * lv_image_0 = lv_image_create(lv_obj_0);
-    lv_image_set_src(lv_image_0, img_lvgl_logo);
+    lv_image_set_src(lv_image_0, img_example_lvgl_logo);
     lv_obj_set_style_image_recolor(lv_image_0, lv_color_hex(0xef4444), LV_PART_MAIN);
     lv_obj_bind_style_prop(lv_image_0, LV_STYLE_IMAGE_RECOLOR_OPA, LV_PART_MAIN, &subject_opa);
     

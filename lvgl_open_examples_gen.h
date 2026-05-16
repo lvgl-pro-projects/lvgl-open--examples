@@ -55,11 +55,17 @@ extern "C" {
  * Fonts
  *----------------*/
 
+extern lv_font_t * font_example_large;
+
 /*----------------
  * Images
  *----------------*/
 
-extern const void * img_lvgl_logo;
+extern const void * img_example_lvgl_logo;
+extern const void * img_arc_bg;
+extern const void * img_arc_indicator;
+extern const void * img_bar_bg;
+extern const void * img_bar_indicator;
 
 /*----------------
  * Subjects
@@ -110,6 +116,16 @@ void lvgl_open_examples_init_gen(const char * asset_path);
 #include "screens/layouts/grid/grid_internal_padding/lv_example_grid_internal_padding_gen.h"
 #include "screens/layouts/grid/grid_rtl/lv_example_grid_rtl_gen.h"
 #include "screens/layouts/grid/grid_subgrid/lv_example_grid_subgrid_gen.h"
+#include "screens/libs/qrcode/qrcode_basic/lv_example_qrcode_basic_gen.h"
+#include "screens/scroll/scroll_chain/lv_example_scroll_chain_gen.h"
+#include "screens/scroll/scroll_floating/lv_example_scroll_floating_gen.h"
+#include "screens/scroll/scroll_one/lv_example_scroll_one_gen.h"
+#include "screens/scroll/scroll_overview/lv_example_scroll_overview_gen.h"
+#include "screens/scroll/scroll_rtl/lv_example_scroll_rtl_gen.h"
+#include "screens/scroll/scroll_scrollable/lv_example_scroll_scrollable_gen.h"
+#include "screens/scroll/scroll_scrollbar_mode/lv_example_scroll_scrollbar_mode_gen.h"
+#include "screens/scroll/scroll_scrollbar_style/lv_example_scroll_scrollbar_style_gen.h"
+#include "screens/scroll/scroll_snap/lv_example_scroll_snap_gen.h"
 #include "screens/styles/style_arc/lv_example_style_arc_gen.h"
 #include "screens/styles/style_background/lv_example_style_background_gen.h"
 #include "screens/styles/style_blur/lv_example_style_blur_gen.h"
@@ -127,6 +143,7 @@ void lvgl_open_examples_init_gen(const char * asset_path);
 #include "screens/styles/style_text/lv_example_style_text_gen.h"
 #include "screens/widgets/arc/arc_bind_value/lv_example_arc_bind_value_gen.h"
 #include "screens/widgets/arc/arc_change_rate/lv_example_arc_change_rate_gen.h"
+#include "screens/widgets/arc/arc_img_indicator/lv_example_arc_img_indicator_gen.h"
 #include "screens/widgets/arc/arc_mode/lv_example_arc_mode_gen.h"
 #include "screens/widgets/arc/arc_pie_chart/lv_example_arc_pie_chart_gen.h"
 #include "screens/widgets/arc/arc_rotation/lv_example_arc_rotation_gen.h"
@@ -134,6 +151,7 @@ void lvgl_open_examples_init_gen(const char * asset_path);
 #include "screens/widgets/arc/arc_styling/lv_example_arc_styling_gen.h"
 #include "screens/widgets/arc/arc_value_range/lv_example_arc_value_range_gen.h"
 #include "screens/widgets/bar/bar_bind_value/lv_example_bar_bind_value_gen.h"
+#include "screens/widgets/bar/bar_img_indicator/lv_example_bar_img_indicator_gen.h"
 #include "screens/widgets/bar/bar_modes/lv_example_bar_modes_gen.h"
 #include "screens/widgets/bar/bar_orientation/lv_example_bar_orientation_gen.h"
 #include "screens/widgets/bar/bar_styling/lv_example_bar_styling_gen.h"
@@ -191,10 +209,12 @@ void lvgl_open_examples_init_gen(const char * asset_path);
 #include "screens/widgets/scale/scale_ticks/lv_example_scale_ticks_gen.h"
 #include "screens/widgets/slider/slider_bind_state/lv_example_slider_bind_state_gen.h"
 #include "screens/widgets/slider/slider_bind_value/lv_example_slider_bind_value_gen.h"
+#include "screens/widgets/slider/slider_img_indicator/lv_example_slider_img_indicator_gen.h"
 #include "screens/widgets/slider/slider_modes/lv_example_slider_modes_gen.h"
 #include "screens/widgets/slider/slider_reversed_direction/lv_example_slider_reversed_direction_gen.h"
 #include "screens/widgets/slider/slider_styling/lv_example_slider_styling_gen.h"
 #include "screens/widgets/slider/slider_value_range_orientation/lv_example_slider_value_range_orientation_gen.h"
+#include "screens/widgets/span/span_styling/lv_example_span_styling_gen.h"
 #include "screens/widgets/spinbox/spinbox_bind_value/lv_example_spinbox_bind_value_gen.h"
 #include "screens/widgets/spinbox/spinbox_format/lv_example_spinbox_format_gen.h"
 #include "screens/widgets/spinbox/spinbox_rollover/lv_example_spinbox_rollover_gen.h"
@@ -216,6 +236,8 @@ void lvgl_open_examples_init_gen(const char * asset_path);
 #include "screens/widgets/tabview/tabview_tab_bar_position/lv_example_tabview_tab_bar_position_gen.h"
 #include "screens/widgets/tabview/tabview_tab_bar_style/lv_example_tabview_tab_bar_style_gen.h"
 #include "screens/widgets/tabview/tabview_tab_button_content/lv_example_tabview_tab_button_content_gen.h"
+#include "screens/widgets/textarea/textarea_cursor/lv_example_textarea_cursor_gen.h"
+#include "screens/widgets/textarea/textarea_placeholder/lv_example_textarea_placeholder_gen.h"
 
 #ifdef __cplusplus
 } /*extern "C"*/

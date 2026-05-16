@@ -130,24 +130,34 @@ def main(argv: list[str]) -> int:
     print(f"Copied {len(xmls)} files.")
     print()
 
-    # Iteratively validate and remove failing files
+     # Iteratively validate and remove failing files
     round_num = 1
     total_removed = 0
+
     while True:
         print(f"Validation round {round_num}...")
+
         result = run_cli(cli_path, "validate")
         combined = result.stdout + result.stderr
 
-        if "[SUCCESS] Validation passed" in combined:
+        if result.stdout:
+            print(result.stdout)
+
+        if result.stderr:
+            print(result.stderr)
+
+        # Success
+        if result.returncode == 0 or "[SUCCESS] Validation passed" in combined:
             print("  All files valid.")
             break
 
         failed = parse_failed_files(combined)
+
         if not failed:
-            # Validation failed but we can't identify which files — stop here
-            print("  Validation failed but no specific files identified in output.")
-            print(combined)
+            print("  Validation failed but no specific files identified.")
             break
+
+        removed_this_round = 0
 
         for path in failed:
             if path.exists():
@@ -155,9 +165,16 @@ def main(argv: list[str]) -> int:
                 print(f"  removing (invalid): {rel}")
                 remove_file(path)
                 total_removed += 1
+                removed_this_round += 1
+            else:
+                print(f"  already removed: {path}")
+
+        # Prevent infinite loop
+        if removed_this_round == 0:
+            print("  No new files removed, stopping to avoid infinite loop.")
+            break
 
         round_num += 1
-
     kept = len(list(SCREENS_DIR.rglob("*.xml")))
     print(f"\n{kept} valid XML(s) kept, {total_removed} removed.")
 

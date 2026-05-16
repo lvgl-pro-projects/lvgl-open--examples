@@ -54,7 +54,7 @@ lv_obj_t * lv_example_image_src_create(void)
     lv_label_set_text(lv_label_0, "Image: source");
     
     lv_obj_t * lv_image_0 = lv_image_create(lv_obj_0);
-    lv_image_set_src(lv_image_0, img_lvgl_logo);
+    lv_image_set_src(lv_image_0, img_example_lvgl_logo);
 
     LV_TRACE_OBJ_CREATE("finished");
 

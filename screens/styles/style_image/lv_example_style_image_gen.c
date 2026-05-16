@@ -66,7 +66,7 @@ lv_obj_t * lv_example_style_image_create(void)
     lv_label_set_text(lv_label_0, "Style: image recolor and rotation");
     
     lv_obj_t * lv_image_0 = lv_image_create(lv_obj_0);
-    lv_image_set_src(lv_image_0, img_lvgl_logo);
+    lv_image_set_src(lv_image_0, img_example_lvgl_logo);
     lv_obj_add_style(lv_image_0, &style_img, 0);
 
     LV_TRACE_OBJ_CREATE("finished");
