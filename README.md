@@ -1,1 +1,1 @@
-# All XML in one project from LVGL Open
+# All LVGL Open XML examples in one project
