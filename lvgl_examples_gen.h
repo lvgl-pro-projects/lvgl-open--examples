@@ -1,9 +1,9 @@
 /**
- * @file lvgl_open_examples_gen.h
+ * @file lvgl_examples_gen.h
  */
 
-#ifndef LVGL_OPEN_EXAMPLES_GEN_H
-#define LVGL_OPEN_EXAMPLES_GEN_H
+#ifndef LVGL_EXAMPLES_GEN_H
+#define LVGL_EXAMPLES_GEN_H
 
 #ifndef UI_SUBJECT_STRING_LENGTH
 #define UI_SUBJECT_STRING_LENGTH 256
@@ -31,9 +31,30 @@ extern "C" {
 
 
 
+/* Prototypes for target functions, needed by responsive const definitions */
+
+void lvgl_examples_set_target(uint32_t target);
+uint32_t lvgl_examples_get_target(void);
+bool lvgl_examples_check_target(uint32_t target);
+
 /*********************
  *      DEFINES
  *********************/
+
+#define LVGL_EXAMPLES_TARGET_UNDEFINED  (0 << 1)
+#define LVGL_EXAMPLES_TARGET_TARGET1    (1 << 1)
+#define LVGL_EXAMPLES_TARGET_ALL        0x0FFFFFFF
+
+/* By default compile for all targets, allowing to switch to any targets at runtime */
+#ifndef LVGL_EXAMPLES_COMPILE_TARGET
+#define LVGL_EXAMPLES_COMPILE_TARGET LVGL_EXAMPLES_TARGET_ALL
+#endif
+
+#define LVGL_EXAMPLES_CHECK_COMPILE_TARGET(target) (LVGL_EXAMPLES_COMPILE_TARGET & (target) ? 1 : 0)
+
+#ifndef LV_XML_EVAL_STRING_BUF_SIZE
+    #define LV_XML_EVAL_STRING_BUF_SIZE 256
+#endif
 
 /**********************
  *      TYPEDEFS
@@ -55,12 +76,15 @@ extern "C" {
  * Fonts
  *----------------*/
 
+/* Targets: any */
 extern lv_font_t * font_example_large;
+
 
 /*----------------
  * Images
  *----------------*/
 
+/* Targets: any */
 extern const void * img_example_lvgl_logo;
 extern const void * img_arc_bg;
 extern const void * img_arc_indicator;
@@ -90,7 +114,7 @@ extern lv_subject_t subject_text;
  * Initialize the component library
  */
 
-void lvgl_open_examples_init_gen(const char * asset_path);
+void lvgl_examples_init_gen(const char * asset_path);
 
 /**********************
  *      MACROS
@@ -241,4 +265,4 @@ void lvgl_open_examples_init_gen(const char * asset_path);
 } /*extern "C"*/
 #endif
 
-#endif /*LVGL_OPEN_EXAMPLES_GEN_H*/
+#endif /*LVGL_EXAMPLES_GEN_H*/

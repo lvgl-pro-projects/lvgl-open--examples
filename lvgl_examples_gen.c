@@ -1,12 +1,12 @@
 /**
- * @file lvgl_open_examples_gen.c
+ * @file lvgl_examples_gen.c
  */
 
 /*********************
  *      INCLUDES
  *********************/
 
-#include "lvgl_open_examples_gen.h"
+#include "lvgl_examples_gen.h"
 
 #if LV_USE_XML
 #endif /* LV_USE_XML */
@@ -23,9 +23,13 @@
  *  STATIC PROTOTYPES
  **********************/
 
+static void check_font(lv_font_t ** font, const char * name);
+
 /**********************
  *  STATIC VARIABLES
  **********************/
+
+static uint32_t lvgl_examples_target = LVGL_EXAMPLES_TARGET_ALL;
 
 /*----------------
  * Translations
@@ -50,15 +54,16 @@ extern lv_font_t font_example_large_data;
  * Images
  *----------------*/
 
-const void * img_example_lvgl_logo;
+/* Targets: any */
+const void * img_example_lvgl_logo = NULL;
 extern const void * img_example_lvgl_logo_data;
-const void * img_arc_bg;
+const void * img_arc_bg = NULL;
 extern const void * img_arc_bg_data;
-const void * img_arc_indicator;
+const void * img_arc_indicator = NULL;
 extern const void * img_arc_indicator_data;
-const void * img_bar_bg;
+const void * img_bar_bg = NULL;
 extern const void * img_bar_bg_data;
-const void * img_bar_indicator;
+const void * img_bar_indicator = NULL;
 extern const void * img_bar_indicator_data;
 
 /*----------------
@@ -84,7 +89,7 @@ lv_subject_t subject_text;
  *   GLOBAL FUNCTIONS
  **********************/
 
-void lvgl_open_examples_init_gen(const char * asset_path)
+void lvgl_examples_init_gen(const char * asset_path)
 {
     char buf[256];
 
@@ -93,18 +98,48 @@ void lvgl_open_examples_init_gen(const char * asset_path)
      * Fonts
      *----------------*/
 
-    /* get font 'font_example_large' from a C array */
-    font_example_large = &font_example_large_data;
+    /* Targets: any */
 
+    #if LVGL_EXAMPLES_CHECK_COMPILE_TARGET(LVGL_EXAMPLES_TARGET_ALL)
+    if (lvgl_examples_check_target(LVGL_EXAMPLES_TARGET_ALL)) {
+        if (!font_example_large) {
+            /* font_example_large */
+            /* get font 'font_example_large' from a C array */
+            font_example_large = &font_example_large_data;
+
+        }
+    }
+    #endif
 
     /*----------------
      * Images
      *----------------*/
-    img_example_lvgl_logo = &img_example_lvgl_logo_data;
-    img_arc_bg = &img_arc_bg_data;
-    img_arc_indicator = &img_arc_indicator_data;
-    img_bar_bg = &img_bar_bg_data;
-    img_bar_indicator = &img_bar_indicator_data;
+
+    /* Targets: any */
+    #if LVGL_EXAMPLES_CHECK_COMPILE_TARGET(LVGL_EXAMPLES_TARGET_ALL)
+    if (lvgl_examples_check_target(LVGL_EXAMPLES_TARGET_ALL)) {
+        /* img_example_lvgl_logo */
+        if (!img_example_lvgl_logo) {
+            img_example_lvgl_logo = &img_example_lvgl_logo_data;
+        }
+        /* img_arc_bg */
+        if (!img_arc_bg) {
+            img_arc_bg = &img_arc_bg_data;
+        }
+        /* img_arc_indicator */
+        if (!img_arc_indicator) {
+            img_arc_indicator = &img_arc_indicator_data;
+        }
+        /* img_bar_bg */
+        if (!img_bar_bg) {
+            img_bar_bg = &img_bar_bg_data;
+        }
+        /* img_bar_indicator */
+        if (!img_bar_indicator) {
+            img_bar_indicator = &img_bar_indicator_data;
+        }
+    }
+    #endif
 
     /*----------------
      * Global styles
@@ -140,6 +175,10 @@ void lvgl_open_examples_init_gen(const char * asset_path)
 #if LV_USE_XML
     /* Register widgets */
 
+    /* Check all fonts / default if needed. This prevents fonts that are used in one target but
+       defined in another from causing assertion failures during rendering of the Preview. */
+    check_font(&font_example_large, "font_example_large");
+
     /* Register fonts */
     lv_xml_register_font(NULL, "font_example_large", font_example_large);
 
@@ -170,8 +209,23 @@ void lvgl_open_examples_init_gen(const char * asset_path)
      *  Permanent screens
      *-------------------*/
     /* If XML is enabled it's assumed that the permanent screens are created
-     * manaully from XML using lv_xml_create() */
+     * manually from XML using lv_xml_create() */
 #endif
+}
+
+void lvgl_examples_set_target(uint32_t target)
+{
+    lvgl_examples_target = target;
+}
+
+uint32_t lvgl_examples_get_target(void)
+{
+    return lvgl_examples_target;
+}
+
+bool lvgl_examples_check_target(uint32_t target)
+{
+    return (lvgl_examples_target & target) ? true : false;
 }
 
 /* Callbacks */
@@ -179,3 +233,11 @@ void lvgl_open_examples_init_gen(const char * asset_path)
 /**********************
  *   STATIC FUNCTIONS
  **********************/
+
+static void check_font(lv_font_t ** font, const char * name)
+{
+    if (!(*font)) {
+        *font = (lv_font_t *)LV_FONT_DEFAULT;
+        LV_LOG_WARN("font `%s` was not set. Using `LV_FONT_DEFAULT` instead", name);
+    }
+}

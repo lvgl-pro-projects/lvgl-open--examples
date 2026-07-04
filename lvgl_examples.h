@@ -1,9 +1,9 @@
 /**
- * @file lvgl_open_examples.h
+ * @file lvgl_examples.h
  */
 
-#ifndef LVGL_OPEN_EXAMPLES_H
-#define LVGL_OPEN_EXAMPLES_H
+#ifndef LVGL_EXAMPLES_H
+#define LVGL_EXAMPLES_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -13,7 +13,7 @@ extern "C" {
  *      INCLUDES
  *********************/
 
-#include "lvgl_open_examples_gen.h"
+#include "lvgl_examples_gen.h"
 
 /*********************
  *      DEFINES
@@ -34,7 +34,7 @@ extern "C" {
 /**
  * Initialize the component library
  */
-void lvgl_open_examples_init(const char * asset_path);
+void lvgl_examples_init(const char * asset_path);
 
 /**********************
  *      MACROS
@@ -44,4 +44,4 @@ void lvgl_open_examples_init(const char * asset_path);
 } /*extern "C"*/
 #endif
 
-#endif /*LVGL_OPEN_EXAMPLES_H*/
+#endif /*LVGL_EXAMPLES_H*/

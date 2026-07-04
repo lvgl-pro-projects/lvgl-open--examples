@@ -1,12 +1,12 @@
 /**
- * @file lvgl_open_examples.c
+ * @file lvgl_examples.c
  */
 
 /*********************
  *      INCLUDES
  *********************/
 
-#include "lvgl_open_examples.h"
+#include "lvgl_examples.h"
 
 /*********************
  *      DEFINES
@@ -32,9 +32,11 @@
  *   GLOBAL FUNCTIONS
  **********************/
 
-void lvgl_open_examples_init(const char * asset_path)
+void lvgl_examples_init(const char * asset_path)
 {
-    lvgl_open_examples_init_gen(asset_path);
+    LV_LOG("Initializing custom C code using LVGL v%d.%d.%d", LVGL_VERSION_MAJOR, LVGL_VERSION_MINOR, LVGL_VERSION_PATCH);
+
+    lvgl_examples_init_gen(asset_path);
 
     /* Add your own custom code here if needed */
 }
